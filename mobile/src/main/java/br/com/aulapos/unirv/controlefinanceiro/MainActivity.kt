@@ -1,20 +1,16 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.EventLogTags
-import com.github.mikephil.charting.charts.PieChart
+import android.support.v7.app.AppCompatActivity
 import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.LegendEntry
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 
 class MainActivity : AppCompatActivity() {
