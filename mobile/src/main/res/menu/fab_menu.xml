@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/fab_link"
+        android:id="@+id/fab_receita"
         android:icon="@drawable/ic_add_write"
-        android:title="" />
+        android:title="@string/fab_1" />
 
     <item
-        android:id="@+id/fab_add"
-        android:icon="@drawable/fab_add"
-        android:title="@string/fab_1" />
+        android:id="@+id/fab_despesa"
+        android:icon="@drawable/ic_add_write"
+        android:title="@string/fab_2" />
 </menu>

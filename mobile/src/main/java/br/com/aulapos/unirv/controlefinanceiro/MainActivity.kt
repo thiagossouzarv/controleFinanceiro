@@ -22,12 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         chartData()
+        floatingMenu()
+    }
 
+    private fun floatingMenu() {
         //Set mini fab's colors.
         fab_l.setMiniFabsColors(
-                R.color.colorPrimary,
-                R.color.green_fab);
-
+                R.color.darkGreen,
+                R.color.darkRed);
         //Set main fab clicklistener.
         fab_l.setMainFabOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
@@ -39,11 +41,11 @@ class MainActivity : AppCompatActivity() {
         fab_l.setMiniFabSelectedListener(object : OptionsFabLayout.OnMiniFabSelectedListener {
             override fun onMiniFabSelected(fabItem: MenuItem) {
                 when (fabItem.getItemId()) {
-                    R.id.fab_add -> Toast.makeText(
+                    R.id.fab_receita -> Toast.makeText(
                             applicationContext,
                             fabItem.getTitle(),
                             Toast.LENGTH_SHORT).show()
-                    R.id.fab_link -> Toast.makeText(applicationContext,
+                    R.id.fab_despesa -> Toast.makeText(applicationContext,
                             fabItem.getTitle(),
                             Toast.LENGTH_SHORT).show()
                     else -> {

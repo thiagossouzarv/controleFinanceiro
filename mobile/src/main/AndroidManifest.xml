@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".material_design_floating_action_menu"></activity>
     </application>
 
 </manifest>
