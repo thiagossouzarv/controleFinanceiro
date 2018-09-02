@@ -3,14 +3,17 @@ package br.com.aulapos.unirv.controlefinanceiro
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import com.github.ag.floatingactionmenu.OptionsFabLayout
 import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +22,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         chartData()
+
+        //Set mini fab's colors.
+        fab_l.setMiniFabsColors(
+                R.color.colorPrimary,
+                R.color.green_fab);
+
+        //Set main fab clicklistener.
+        fab_l.setMainFabOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                //Toast.makeText(this@MainActivity, "Main fab clicked!", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        //Set mini fabs clicklisteners.
+        fab_l.setMiniFabSelectedListener(object : OptionsFabLayout.OnMiniFabSelectedListener {
+            override fun onMiniFabSelected(fabItem: MenuItem) {
+                when (fabItem.getItemId()) {
+                    R.id.fab_add -> Toast.makeText(
+                            applicationContext,
+                            fabItem.getTitle(),
+                            Toast.LENGTH_SHORT).show()
+                    R.id.fab_link -> Toast.makeText(applicationContext,
+                            fabItem.getTitle(),
+                            Toast.LENGTH_SHORT).show()
+                    else -> {
+                    }
+                }
+            }
+        })
     }
 
 
