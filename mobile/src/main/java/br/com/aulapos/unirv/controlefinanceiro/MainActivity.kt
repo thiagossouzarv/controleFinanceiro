@@ -1,8 +1,12 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -14,16 +18,39 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.menu_lateral.*
 
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.menu_lateral)
+        setupToolbar()
         chartData()
         floatingMenu()
     }
+
+    @SuppressLint("ResourceAsColor")
+    fun setupToolbar() {
+        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        toolbar.setTitle(R.string.titulo_toolbar)
+        setSupportActionBar(toolbar)
+
+
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_principal, menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
 
     private fun floatingMenu() {
         //Set mini fab's colors.
