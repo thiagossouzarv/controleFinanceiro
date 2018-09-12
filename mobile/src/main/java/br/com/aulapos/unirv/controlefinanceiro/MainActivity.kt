@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         toolbar.setTitle(R.string.titulo_toolbar)
         setSupportActionBar(toolbar)
 
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitleTextColor(Color.WHITE);
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)

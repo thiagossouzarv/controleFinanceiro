@@ -17,5 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CustomActivityTheme" parent="AppTheme">
+        <item name="android:actionButtonStyle">@drawable/ic_menu_write_24dp</item>
+    </style>
+
 
 </resources>
