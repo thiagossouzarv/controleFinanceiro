@@ -11,4 +11,17 @@
     <string name="nav_header_subtitle">thiagossouzarv@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Configuracoes</string>
+    <string name="titulo_toolbar_receita">Receita</string>
+    <string name="titulo_toolbar_despesa">Despesa</string>
+
+
+
+    <string name="btn_take_pic">Tirar Foto</string>
+    <string name="permission_request_canceled">Permissao para acessar a camera negada!</string>
+    <string name="error_permission_not_granted">Permissao nao concedida!</string>
+    <string name="title_error">Erro Camera</string>
+    <string name="label_ok">Ok</string>
+    <string name="titulo_toolbar_camera">Camera</string>
+    <string name="lblDescricao">Descrição</string>
+
 </resources>

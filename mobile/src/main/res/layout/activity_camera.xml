@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DespesaActivity">
-
+    tools:context=".CameraActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -22,7 +21,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <com.wonderkiln.camerakit.CameraView
+        android:layout_below="@id/appBar"
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:layout_above="@id/btn_take_pic"/>
 
-
+    <Button
+        android:id="@+id/btn_take_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_take_pic"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

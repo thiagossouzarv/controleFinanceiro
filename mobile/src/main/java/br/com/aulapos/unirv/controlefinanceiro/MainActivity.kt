@@ -1,6 +1,8 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.ActionBarDrawerToggle
@@ -9,7 +11,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.github.ag.floatingactionmenu.OptionsFabLayout
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         chartData()
         floatingMenu()
+        //abreTelas(this, ReceitaActivity::class.java)
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -39,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setSubtitleTextColor(Color.WHITE);
+
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -69,19 +73,21 @@ class MainActivity : AppCompatActivity() {
         //Set mini fabs clicklisteners.
         fab_l.setMiniFabSelectedListener(object : OptionsFabLayout.OnMiniFabSelectedListener {
             override fun onMiniFabSelected(fabItem: MenuItem) {
-                when (fabItem.getItemId()) {
-                    R.id.fab_receita -> Toast.makeText(
-                            applicationContext,
-                            fabItem.getTitle(),
-                            Toast.LENGTH_SHORT).show()
-                    R.id.fab_despesa -> Toast.makeText(applicationContext,
-                            fabItem.getTitle(),
-                            Toast.LENGTH_SHORT).show()
-                    else -> {
+                 when (fabItem.getItemId()) {
+                    R.id.fab_receita->abreTelas(applicationContext, ReceitaActivity::class.java)
+
+                    R.id.fab_despesa->abreTelas(applicationContext, DespesaActivity::class.java)
+
+                     else -> {
                     }
-                }
+                 }
             }
         })
+    }
+
+    private fun abreTelas(applicationContext: Context, classe: Class<*>) {
+        val intent = Intent(applicationContext, classe)
+        startActivity(intent)
     }
 
 

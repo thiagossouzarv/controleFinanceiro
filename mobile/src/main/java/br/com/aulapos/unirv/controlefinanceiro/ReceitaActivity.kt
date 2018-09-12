@@ -1,31 +1,28 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.R.menu
-import android.content.Intent
-import android.content.pm.PackageManager
-import com.wonderkiln.camerakit.CameraKit
-import com.afollestad.materialdialogs.MaterialDialog
+import kotlinx.android.synthetic.main.menu_lateral.*
 
-
-class DespesaActivity : AppCompatActivity() {
+class ReceitaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_despesa)
+        setContentView(R.layout.activity_receita)
         setupToolbar()
     }
 
     @SuppressLint("ResourceAsColor")
     fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
-        toolbar.setTitle(R.string.titulo_toolbar_despesa)
+        toolbar.setTitle(R.string.titulo_toolbar_receita)
         setSupportActionBar(toolbar)
 
         toolbar.setTitleTextColor(Color.WHITE);
