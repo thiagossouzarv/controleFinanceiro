@@ -1,6 +1,6 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
-import adapter.DespesasAdapter
+import adapter.ReceitaAdapter
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -9,38 +9,27 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_lista_despesas.*
-import model.Despesa
-import model.DespesaDAO
+import kotlinx.android.synthetic.main.activity_lista_receita.*
+import model.Receita
+import model.ReceitaDAO
 import java.util.*
 
+class ListaReceitaActivity : AppCompatActivity() {
 
-class ListaDespesasActivity : AppCompatActivity() {
-
-    internal var despesas: ArrayList<Despesa>? = null
+    internal var receita: ArrayList<Receita>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lista_despesas)
+        setContentView(R.layout.activity_lista_receita)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
         createRecicleView()
-
-    }
-
-    fun createRecicleView() {
-        val despesaDAO = DespesaDAO(this)
-        despesas = despesaDAO.getAll()
-
-        val adapter: DespesasAdapter = DespesasAdapter(despesas!!, this)
-        rvDespesas.adapter = adapter
-        rvDespesas.layoutManager = LinearLayoutManager(this)
     }
 
     @SuppressLint("ResourceAsColor")
     fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
-        toolbar.setTitle(R.string.titulo_toolbar_lista_despesa)
+        toolbar.setTitle(R.string.titulo_toolbar_lista_receita)
         setSupportActionBar(toolbar)
 
         toolbar.setTitleTextColor(Color.WHITE);
@@ -54,6 +43,15 @@ class ListaDespesasActivity : AppCompatActivity() {
 
     }
 
+    fun createRecicleView() {
+        val receitaDAO = ReceitaDAO(this)
+        receita = receitaDAO.getAll()
+
+        val adapter: ReceitaAdapter = ReceitaAdapter(receita!!, this)
+        rvReceita.adapter = adapter
+        rvReceita.layoutManager = LinearLayoutManager(this)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // handle arrow click here
         if (item.itemId == android.R.id.home) {
@@ -61,5 +59,6 @@ class ListaDespesasActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 }

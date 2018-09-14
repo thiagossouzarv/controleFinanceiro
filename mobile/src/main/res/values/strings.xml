@@ -24,5 +24,6 @@
     <string name="lblDescricao">Descrição</string>
     <string name="titulo_toolbar_lista_despesa">Lista de despesas</string>
     <string name="lbl_deletar">Deletar</string>
+    <string name="titulo_toolbar_lista_receita">Lista de Receitas</string>
 
 </resources>

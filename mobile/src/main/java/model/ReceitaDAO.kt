@@ -43,7 +43,7 @@ class ReceitaDAO : SQLiteOpenHelper {
         val despesaTab = ContentValues()
         despesaTab.put("descricao", receita.descricao)
         despesaTab.put("categoria_id", receita.categoria)
-        despesaTab.put("valor", receita.descricao)
+        despesaTab.put("valor", receita.valor)
 
         db.insert(DB_NAME, null, despesaTab)
         db.close()
@@ -55,7 +55,7 @@ class ReceitaDAO : SQLiteOpenHelper {
         val despesaTab = ContentValues()
         despesaTab.put("descricao", receita.descricao)
         despesaTab.put("categoria_id", receita.categoria)
-        despesaTab.put("valor", receita.descricao)
+        despesaTab.put("valor", receita.valor)
 
 
         db.update(DB_NAME, despesaTab, "id=?", arrayOf(receita.id.toString()))

@@ -3,6 +3,7 @@ package br.com.aulapos.unirv.controlefinanceiro
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,9 +11,12 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_despesa.*
 import model.Despesa
 import model.DespesaDAO
+import java.io.File
 
 
 class DespesaActivity : AppCompatActivity() {
@@ -31,11 +35,12 @@ class DespesaActivity : AppCompatActivity() {
 
             var despesasDAO = DespesaDAO(this)
             despesasDAO.create(despesa)
-
-            var lista = despesasDAO.getAll()
-            for (despesas in lista) {
-                despesas.descricao
-            }
+            Toast.makeText(this, "Despesa Cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+            finish()
+//            var lista = despesasDAO.getAll()
+//            for (despesas in lista) {
+//                despesas.descricao
+//            }
         })
     }
 
@@ -78,6 +83,16 @@ class DespesaActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+
+        fun setImagemCamera(imagemTela: ImageView, imgFile: File) {
+            if (imgFile.exists()) {
+                val myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath())
+                imagemTela.setImageBitmap(myBitmap)
+            }
+        }
     }
 
 

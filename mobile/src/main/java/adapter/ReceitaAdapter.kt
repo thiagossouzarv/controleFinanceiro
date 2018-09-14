@@ -9,64 +9,64 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import br.com.aulapos.unirv.controlefinanceiro.R
-import model.Despesa
-import model.DespesaDAO
+import model.Receita
+import model.ReceitaDAO
 
-class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
+class ReceitaAdapter : RecyclerView.Adapter<ReceitaAdapter.ViewHolder> {
 
 
-    private var mDespesas: List<Despesa>? = null
+    private var mReceita: List<Receita>? = null
     var contexto: Context? = null
 
     // Pass in the contact array into the constructor
-    constructor(despesas: List<Despesa>, context: Context) {
-        mDespesas = despesas
+    constructor(receita: List<Receita>, context: Context) {
+        mReceita = receita
         contexto = context
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, i: Int): DespesasAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, i: Int): ReceitaAdapter.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
 
         // Inflate the custom layout
-        val contactView = inflater.inflate(R.layout.activity_item_despesa, parent, false)
+        val contactView = inflater.inflate(R.layout.activity_item_receita, parent, false)
 
         // Return a new holder instance
         return ViewHolder(contactView)
     }
 
-    override fun onBindViewHolder(viewHolder: DespesasAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ReceitaAdapter.ViewHolder, position: Int) {
         // Get the data model based on position
-        val despesa = mDespesas?.get(position)
+        val receita = mReceita?.get(position)
 
 
         val textView = viewHolder.nameTextView
-        textView?.setText(despesa?.descricao)
+        textView?.setText(receita?.descricao)
 
         val valor = viewHolder.valor
-        val valorTexto = "R$ " + despesa?.valor.toString()
+        val valorTexto = "R$ " + receita?.valor.toString()
         valor?.setText(valorTexto)
 
         val button = viewHolder.button
         button?.setOnClickListener(View.OnClickListener {
-            deletaDespesa(despesa?.id!!, this.contexto!!)
+            deletaReceita(receita?.id!!, this.contexto!!)
 
         })
 
 
     }
 
-    fun deletaDespesa(id: Int, context: Context) {
-        var despesasDAO = DespesaDAO(context)
-        var despesa = Despesa()
-        despesa.id = id
-        despesasDAO.delete(despesa)
+    fun deletaReceita(id: Int, context: Context) {
+        var receitaDAO = ReceitaDAO(context)
+        var receita = Receita()
+        receita.id = id
+        receitaDAO.delete(receita)
         Toast.makeText(context, "Deletado com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
     override fun getItemCount(): Int {
-        return mDespesas?.size!!
+        return mReceita?.size!!
     }
 
 
@@ -76,9 +76,9 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
         var button: Button? = null
 
         constructor(itemView: View) : super(itemView) {
-            nameTextView = itemView.findViewById(R.id.rvDescricao) as TextView
-            valor = itemView.findViewById(R.id.rvValor) as TextView
-            button = itemView.findViewById(R.id.rvDelete_button) as Button
+            nameTextView = itemView.findViewById(R.id.rvDescricaoReceita) as TextView
+            valor = itemView.findViewById(R.id.rvValorReceita) as TextView
+            button = itemView.findViewById(R.id.rvDelete_button_receita) as Button
 
         }
     }

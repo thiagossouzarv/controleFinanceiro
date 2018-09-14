@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
-    android:paddingBottom="10dp"
     android:background="@color/colorPrimary"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
     android:paddingTop="10dp">
 
     <LinearLayout
@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/rvDescricao"
+            android:id="@+id/rvDescricaoReceita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -27,7 +27,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/rvData"
+            android:id="@+id/rvCategoriaReceita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -39,16 +39,16 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/rvValor"
+        android:id="@+id/rvValorReceita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:hint="R$ 54,00"
-        android:textColor="@color/darkRed"
-        android:textColorHint="@color/darkRed" />
+        android:textColor="@color/darkGreen"
+        android:textColorHint="@color/darkGreen" />
 
     <Button
-        android:id="@+id/rvDelete_button"
+        android:id="@+id/rvDelete_button_receita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"

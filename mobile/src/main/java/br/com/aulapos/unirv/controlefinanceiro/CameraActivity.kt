@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.wonderkiln.camerakit.CameraKitEventCallback
 import com.wonderkiln.camerakit.CameraKitImage
@@ -67,6 +69,7 @@ class CameraActivity : AppCompatActivity() {
         btn_take_pic.setOnClickListener(View.OnClickListener {
             camera.captureImage(CameraKitEventCallback { cameraKitImage ->
                 saveImage(cameraKitImage)
+                finish()
             })
         })
     }
@@ -111,7 +114,12 @@ class CameraActivity : AppCompatActivity() {
             }
 
         }
+        if (file != null) {
+            val myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
 
+            var imagem: ImageView = findViewById(R.id.imagemComprovanteDespesa)
+            imagem.setImageBitmap(myBitmap)
+        }
         return file!!.absolutePath
     }
 

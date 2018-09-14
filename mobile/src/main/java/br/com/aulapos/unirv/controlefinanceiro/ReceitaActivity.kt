@@ -9,6 +9,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_receita.*
+import model.Receita
+import model.ReceitaDAO
 
 class ReceitaActivity : AppCompatActivity() {
 
@@ -17,6 +22,22 @@ class ReceitaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_receita)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
+
+        botao_salvar_receita.setOnClickListener(View.OnClickListener {
+            var receita = Receita()
+            receita.descricao = descricaoReceita.text.toString()
+            receita.valor = valorReceita.text.toString().toFloat()
+            receita.categoria = categoriaReceita.text.toString().toInt()
+
+            var receitaDAO = ReceitaDAO(this)
+            receitaDAO.create(receita)
+            Toast.makeText(this, "Receita Cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+            finish()
+//            var lista = despesasDAO.getAll()
+//            for (despesas in lista) {
+//                despesas.descricao
+//            }
+        })
     }
 
     @SuppressLint("ResourceAsColor")

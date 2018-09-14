@@ -22,7 +22,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/descricao"
+        android:id="@+id/descricaoReceita"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/appBar"
@@ -38,10 +38,10 @@
         app:met_singleLineEllipsis="true" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/valor"
+        android:id="@+id/valorReceita"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/descricao"
+        android:layout_below="@id/descricaoReceita"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:hint="Valor"
@@ -54,10 +54,10 @@
         app:met_singleLineEllipsis="true" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/categoria"
+        android:id="@+id/categoriaReceita"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/valor"
+        android:layout_below="@id/valorReceita"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:hint="Categoria"
@@ -73,7 +73,7 @@
         android:id="@+id/botao_salvar_receita"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/categoria"
+        android:layout_below="@id/categoriaReceita"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:background="@color/colorAccent"

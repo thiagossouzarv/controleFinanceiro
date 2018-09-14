@@ -24,23 +24,51 @@ import com.github.mikephil.charting.interfaces.datasets.IPieDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_lateral.*
+import model.Despesa
+import model.DespesaDAO
+import model.Receita
+import model.ReceitaDAO
 
 class MenuLateralActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    var totalDespesas: Float? = null
+    var totalReceita: Float? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menu_lateral)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
-        chartData()
-        floatingMenu()
-        setClickMenuLateral()
-        //abreTelas(this, ReceitaActivity::class.java)
 
+        floatingMenu()
     }
 
-    fun setClickMenuLateral() {
+    override fun onResume() {
+        calculaTotalReceitaDespesa()
+        chartData()
+        super.onResume()
+    }
+
+    fun calculaTotalReceitaDespesa() {
+        var despesaDAO = DespesaDAO(this)
+        var despesas = despesaDAO.getAll()
+        var despesa: Despesa? = null
+        totalDespesas = 0.0f
+        for (despesa in despesas) {
+            totalDespesas = totalDespesas!! + despesa.valor
+        }
+
+        var receitaDAO = ReceitaDAO(this)
+        var receitas = receitaDAO.getAll()
+        var receita: Receita? = null
+        totalReceita = 0.0f
+        for (receita in receitas) {
+            totalReceita = totalReceita!! + receita.valor
+        }
+
+        totalDespesaTela.text = "R$ " + totalDespesas.toString()
+        totalReceitaTela.text = "R$ " + totalReceita.toString()
+
 
     }
 
@@ -106,8 +134,8 @@ class MenuLateralActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     private fun chartData() {
 
         val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(4400F, 0F))
-        entries.add(PieEntry(2200F, 1F))
+        entries.add(PieEntry(this!!.totalDespesas!!, 0F))
+        entries.add(PieEntry(this!!.totalReceita!!, 1F))
 
 
         val piecolors = intArrayOf(Color.rgb(202, 46, 22), Color.rgb(28, 176, 19))
@@ -130,10 +158,6 @@ class MenuLateralActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
 
-    fun navegarListaDespesa() {
-        var intent = Intent(this, ListaDespesasActivity::class.java)
-        startActivity(intent)
-    }
 
     override fun onBackPressed() {
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
@@ -151,9 +175,8 @@ class MenuLateralActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         if (id == R.id.nav_despesas) {
             navegarListaDespesa()
-
         } else if (id == R.id.nav_receita) {
-
+            navegarListaReceita()
         } else if (id == R.id.nav_compartilhar) {
 
         } else if (id == R.id.nav_enviar) {
@@ -164,6 +187,17 @@ class MenuLateralActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
+
+    fun navegarListaDespesa() {
+        var intent = Intent(this, ListaDespesasActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun navegarListaReceita() {
+        var intent = Intent(this, ListaReceitaActivity::class.java)
+        startActivity(intent)
+    }
+
 
 
 }
