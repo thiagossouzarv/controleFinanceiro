@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
     android:layout_height="match_parent"
     tools:context=".ReceitaActivity">
 
@@ -22,4 +21,64 @@
 
     </android.support.design.widget.AppBarLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appBar"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="Descrição"
+        android:textCursorDrawable="@drawable/text_cursor_cyan"
+        android:textSize="20sp"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@drawable/ic_chat_white"
+        app:met_iconPadding="0dp"
+        app:met_primaryColor="@color/colorAccent"
+        app:met_singleLineEllipsis="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/valor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descricao"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Valor"
+        android:textCursorDrawable="@drawable/text_cursor_cyan"
+        android:textSize="20sp"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@drawable/ic_chat_white"
+        app:met_iconPadding="0dp"
+        app:met_primaryColor="@color/colorAccent"
+        app:met_singleLineEllipsis="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/categoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/valor"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Categoria"
+        android:textCursorDrawable="@drawable/text_cursor_cyan"
+        android:textSize="20sp"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@drawable/ic_chat_white"
+        app:met_iconPadding="5dp"
+        app:met_primaryColor="@color/colorAccent"
+        app:met_singleLineEllipsis="true" />
+
+    <Button
+        android:id="@+id/botao_salvar_receita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoria"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent"
+        android:hint="Salvar"
+        android:textColorHint="@color/write" />
+
+
+</RelativeLayout>

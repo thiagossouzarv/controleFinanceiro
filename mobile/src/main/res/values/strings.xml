@@ -15,7 +15,6 @@
     <string name="titulo_toolbar_despesa">Despesa</string>
 
 
-
     <string name="btn_take_pic">Tirar Foto</string>
     <string name="permission_request_canceled">Permissao para acessar a camera negada!</string>
     <string name="error_permission_not_granted">Permissao nao concedida!</string>

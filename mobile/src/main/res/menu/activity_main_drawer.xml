@@ -5,21 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_muda_cidade"
-            android:icon="@android:drawable/ic_dialog_map"
-            android:title="Mudar Cidade" />
-        <!--<item-->
-        <!--android:id="@+id/nav_gallery"-->
-        <!--android:icon="@drawable/ic_menu_gallery"-->
-        <!--android:title="Gallery" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_slideshow"-->
-        <!--android:icon="@drawable/ic_menu_slideshow"-->
-        <!--android:title="Slideshow" />-->
+            android:id="@+id/nav_despesas"
+            android:icon="@drawable/ic_remove_circle"
+            android:title="Lista Despesas" />
         <item
-            android:id="@+id/nav_configuracoes"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Configuracoes" />
+            android:id="@+id/nav_receita"
+            android:icon="@drawable/ic_add_circle"
+            android:title="Lista Receita" />
     </group>
 
     <item android:title="Compartilhar">

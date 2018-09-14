@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -22,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_lateral.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,6 +118,27 @@ class MainActivity : AppCompatActivity() {
         pieChart.description = descricao
         pieChart.setData(data)
 
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        val id = item.itemId
+
+        if (id == R.id.nav_despesas) {
+            var intent = Intent(this, ListaDespesasActivity::class.java)
+            startActivity(intent)
+        } else if (id == R.id.nav_receita) {
+
+        } else if (id == R.id.nav_compartilhar) {
+
+        } else if (id == R.id.nav_enviar) {
+
+        }
+
+        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
+        drawer.closeDrawer(GravityCompat.START)
+        return true
     }
 
 }

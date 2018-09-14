@@ -21,7 +21,7 @@
     <!--android:layout_height="?attr/actionBarSize"-->
     <!--android:background="#59000000"-->
     <!--&gt;</android.support.v7.widget.ActionMenuView>-->
-    <!--</android.support.v7.widget.Toolbar>-->
+    <!--</android.support.v7.widget.Toolbar> -->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"

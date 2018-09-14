@@ -1,17 +1,17 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.R.menu
-import android.content.Intent
-import android.content.pm.PackageManager
-import com.wonderkiln.camerakit.CameraKit
-import com.afollestad.materialdialogs.MaterialDialog
+import android.view.View
+import kotlinx.android.synthetic.main.activity_despesa.*
+import model.Despesa
+import model.DespesaDAO
 
 
 class DespesaActivity : AppCompatActivity() {
@@ -20,6 +20,21 @@ class DespesaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_despesa)
         setupToolbar()
+
+        botao_salvar_despesa.setOnClickListener(View.OnClickListener {
+            var despesa = Despesa()
+            despesa.descricao = descricao.text.toString()
+            despesa.valor = valor.text.toString().toFloat()
+            despesa.categoria = categoria.text.toString().toInt()
+
+            var despesasDAO = DespesaDAO(this)
+            despesasDAO.create(despesa)
+
+            var lista = despesasDAO.getAll()
+            for (despesas in lista) {
+                despesas.descricao
+            }
+        })
     }
 
     @SuppressLint("ResourceAsColor")
@@ -52,6 +67,11 @@ class DespesaActivity : AppCompatActivity() {
 
         if (item.itemId == R.id.menuCamera) {
             var intent = Intent(this,CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        if (item.itemId == R.id.QRCode) {
+            var intent = Intent(this, QRCodeActivity::class.java)
             startActivity(intent)
         }
 
