@@ -1,5 +1,6 @@
 package adapter
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,18 @@ import android.widget.Button
 import android.widget.TextView
 import br.com.aulapos.unirv.controlefinanceiro.R
 import model.Despesa
+import model.DespesaDAO
 
 class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
 
 
     private var mDespesas: List<Despesa>? = null
+    var contexto: Context? = null
 
     // Pass in the contact array into the constructor
-    constructor(despesas: List<Despesa>) {
+    constructor(despesas: List<Despesa>, context: Context) {
         mDespesas = despesas
+        contexto = context
     }
 
 
@@ -38,8 +42,25 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
 
         val textView = viewHolder.nameTextView
         textView?.setText(despesa?.descricao)
-        val button = viewHolder.messageButton
-        button?.setText(despesa?.categoria!!)
+
+        val valor = viewHolder.valor
+        val valorTexto = "R$ " + despesa?.valor.toString()
+        valor?.setText(valorTexto)
+
+        val button = viewHolder.button
+        button?.setOnClickListener(View.OnClickListener {
+            deletaDespesa(despesa?.id!!, this.contexto!!)
+
+        })
+
+
+    }
+
+    fun deletaDespesa(id: Int, context: Context) {
+        var despesasDAO = DespesaDAO(context)
+        var despesa = Despesa()
+        despesa.id = id
+        despesasDAO.delete(despesa)
     }
 
     override fun getItemCount(): Int {
@@ -47,18 +68,22 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
     }
 
 
-    inner class ViewHolder
-    (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder : RecyclerView.ViewHolder {
         var nameTextView: TextView? = null
-        var messageButton: Button? = null
+        var valor: TextView? = null
+        var button: Button? = null
 
-
-        fun ViewHolder(itemView: View) {
-            super.itemView
+        constructor(itemView: View) : super(itemView) {
             nameTextView = itemView.findViewById(R.id.rvDescricao) as TextView
-            messageButton = itemView.findViewById(R.id.rvMessage_button) as Button
+            valor = itemView.findViewById(R.id.rvValor) as TextView
+            button = itemView.findViewById(R.id.rvDelete_button) as Button
+
         }
     }
 
 
 }
+
+
+
+

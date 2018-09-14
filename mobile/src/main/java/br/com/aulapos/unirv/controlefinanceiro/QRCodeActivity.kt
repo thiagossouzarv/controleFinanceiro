@@ -1,5 +1,6 @@
 package br.com.aulapos.unirv.controlefinanceiro
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -12,6 +13,7 @@ class QRCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrcode)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mScannerView = ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);

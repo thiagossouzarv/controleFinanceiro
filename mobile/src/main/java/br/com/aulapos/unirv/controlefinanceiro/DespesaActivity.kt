@@ -2,6 +2,7 @@ package br.com.aulapos.unirv.controlefinanceiro
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,6 +20,7 @@ class DespesaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_despesa)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
 
         botao_salvar_despesa.setOnClickListener(View.OnClickListener {

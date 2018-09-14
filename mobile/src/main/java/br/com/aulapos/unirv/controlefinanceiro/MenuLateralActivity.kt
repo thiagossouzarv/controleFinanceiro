@@ -6,6 +6,9 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -22,13 +25,12 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_lateral.*
 
-
-class MainActivity : AppCompatActivity() {
+class MenuLateralActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.menu_lateral)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
         chartData()
@@ -51,17 +53,18 @@ class MainActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setSubtitleTextColor(Color.WHITE);
 
-
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        nav_view.setNavigationItemSelectedListener(this)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
-        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
+        //
         return super.onCreateOptionsMenu(menu)
 
     }
@@ -82,14 +85,14 @@ class MainActivity : AppCompatActivity() {
         //Set mini fabs clicklisteners.
         fab_l.setMiniFabSelectedListener(object : OptionsFabLayout.OnMiniFabSelectedListener {
             override fun onMiniFabSelected(fabItem: MenuItem) {
-                 when (fabItem.getItemId()) {
-                    R.id.fab_receita->abreTelas(applicationContext, ReceitaActivity::class.java)
+                when (fabItem.getItemId()) {
+                    R.id.fab_receita -> abreTelas(applicationContext, ReceitaActivity::class.java)
 
-                    R.id.fab_despesa->abreTelas(applicationContext, DespesaActivity::class.java)
+                    R.id.fab_despesa -> abreTelas(applicationContext, DespesaActivity::class.java)
 
-                     else -> {
+                    else -> {
                     }
-                 }
+                }
             }
         })
     }
@@ -126,19 +129,41 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.nav_despesas) {
-            navegarListaDespesa() // close this activity and return to preview activity (if there is any)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 
     fun navegarListaDespesa() {
         var intent = Intent(this, ListaDespesasActivity::class.java)
         startActivity(intent)
     }
 
+    override fun onBackPressed() {
+        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        val id = item.itemId
+
+        if (id == R.id.nav_despesas) {
+            navegarListaDespesa()
+
+        } else if (id == R.id.nav_receita) {
+
+        } else if (id == R.id.nav_compartilhar) {
+
+        } else if (id == R.id.nav_enviar) {
+
+        }
+
+        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
 
 }
-

@@ -22,5 +22,7 @@
     <string name="label_ok">Ok</string>
     <string name="titulo_toolbar_camera">Camera</string>
     <string name="lblDescricao">Descrição</string>
+    <string name="titulo_toolbar_lista_despesa">Lista de despesas</string>
+    <string name="lbl_deletar">Deletar</string>
 
 </resources>

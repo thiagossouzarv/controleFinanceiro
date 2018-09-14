@@ -2,19 +2,19 @@ package br.com.aulapos.unirv.controlefinanceiro
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
-import com.wonderkiln.camerakit.CameraKit
 import com.wonderkiln.camerakit.CameraKitEventCallback
 import com.wonderkiln.camerakit.CameraKitImage
 import com.wonderkiln.camerakit.CameraView
@@ -32,6 +32,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
         abreCamera()
     }

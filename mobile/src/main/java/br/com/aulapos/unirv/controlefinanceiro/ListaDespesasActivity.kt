@@ -2,6 +2,7 @@ package br.com.aulapos.unirv.controlefinanceiro
 
 import adapter.DespesasAdapter
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -13,6 +14,7 @@ import model.Despesa
 import model.DespesaDAO
 import java.util.*
 
+
 class ListaDespesasActivity : AppCompatActivity() {
 
     internal var despesas: ArrayList<Despesa>? = null
@@ -20,6 +22,7 @@ class ListaDespesasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_despesas)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
         createRecicleView()
 
@@ -31,16 +34,17 @@ class ListaDespesasActivity : AppCompatActivity() {
         val despesaDAO = DespesaDAO(this)
         despesas = despesaDAO.getAll()
 
-        val adapter: DespesasAdapter = DespesasAdapter(despesas!!)
+        val adapter: DespesasAdapter = DespesasAdapter(despesas!!, this)
         rvDespesas.adapter = adapter
         rvDespesas.layoutManager = LinearLayoutManager(this)
+
 
     }
 
     @SuppressLint("ResourceAsColor")
     fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
-        toolbar.setTitle(R.string.titulo_toolbar_camera)
+        toolbar.setTitle(R.string.titulo_toolbar_lista_despesa)
         setSupportActionBar(toolbar)
 
         toolbar.setTitleTextColor(Color.WHITE);
