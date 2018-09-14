@@ -41,8 +41,11 @@ class ReceitaAdapter : RecyclerView.Adapter<ReceitaAdapter.ViewHolder> {
         val receita = mReceita?.get(position)
 
 
-        val textView = viewHolder.nameTextView
+        var textView = viewHolder.nameTextView
         textView?.setText(receita?.descricao)
+
+        textView = viewHolder.categoria
+        textView?.setText(receita?.categoria)
 
         val valor = viewHolder.valor
         val valorTexto = "R$ " + receita?.valor.toString()
@@ -74,10 +77,12 @@ class ReceitaAdapter : RecyclerView.Adapter<ReceitaAdapter.ViewHolder> {
         var nameTextView: TextView? = null
         var valor: TextView? = null
         var button: Button? = null
+        var categoria: TextView? = null
 
         constructor(itemView: View) : super(itemView) {
             nameTextView = itemView.findViewById(R.id.rvDescricaoReceita) as TextView
             valor = itemView.findViewById(R.id.rvValorReceita) as TextView
+            categoria = itemView.findViewById(R.id.rvCategoriaReceita)
             button = itemView.findViewById(R.id.rvDelete_button_receita) as Button
 
         }

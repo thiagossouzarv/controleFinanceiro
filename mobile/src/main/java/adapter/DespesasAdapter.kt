@@ -41,8 +41,11 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
         val despesa = mDespesas?.get(position)
 
 
-        val textView = viewHolder.nameTextView
+        var textView = viewHolder.nameTextView
         textView?.setText(despesa?.descricao)
+
+        textView = viewHolder.categoria
+        textView?.setText(despesa?.categoria)
 
         val valor = viewHolder.valor
         val valorTexto = "R$ " + despesa?.valor.toString()
@@ -73,11 +76,13 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
     inner class ViewHolder : RecyclerView.ViewHolder {
         var nameTextView: TextView? = null
         var valor: TextView? = null
+        var categoria: TextView? = null
         var button: Button? = null
 
         constructor(itemView: View) : super(itemView) {
             nameTextView = itemView.findViewById(R.id.rvDescricao) as TextView
             valor = itemView.findViewById(R.id.rvValor) as TextView
+            categoria = itemView.findViewById(R.id.rvCategoria)
             button = itemView.findViewById(R.id.rvDelete_button) as Button
 
         }

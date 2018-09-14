@@ -21,7 +21,7 @@ class DespesaDAO : SQLiteOpenHelper {
         val CREATE_USER = "CREATE TABLE `despesas` (" +
                 " `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 " `descricao` varchar(50) NOT NULL, " +
-                " `categoria_id` INTEGER NOT NULL, " +
+                " `categoria` varchar(50) NOT NULL, " +
                 " `valor` FLOAT(13,2) NOT NULL );"
         if (sqLiteDatabase != null) {
             sqLiteDatabase.execSQL(CREATE_USER)
@@ -42,7 +42,7 @@ class DespesaDAO : SQLiteOpenHelper {
 
         val despesaTab = ContentValues()
         despesaTab.put("descricao", despesa.descricao)
-        despesaTab.put("categoria_id", despesa.categoria)
+        despesaTab.put("categoria", despesa.categoria)
         despesaTab.put("valor", despesa.valor)
 
         db.insert(DB_NAME, null, despesaTab)
@@ -54,7 +54,7 @@ class DespesaDAO : SQLiteOpenHelper {
 
         val despesaTab = ContentValues()
         despesaTab.put("descricao", despesa.descricao)
-        despesaTab.put("categoria_id", despesa.categoria)
+        despesaTab.put("categoria", despesa.categoria)
         despesaTab.put("valor", despesa.valor)
 
 
@@ -83,7 +83,7 @@ class DespesaDAO : SQLiteOpenHelper {
 
                 despesas.id = cursor.getInt(0)
                 despesas.descricao = cursor.getString(1)
-                despesas.categoria = cursor.getInt(2)
+                despesas.categoria = cursor.getString(2)
                 despesas.valor = cursor.getFloat(3)
 
                 despesasList.add(despesas)
@@ -97,7 +97,7 @@ class DespesaDAO : SQLiteOpenHelper {
 
         val db = this.readableDatabase
 
-        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria_id", "valor"),
+        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria", "valor"),
                 "id = ?",
                 arrayOf(id.toString()), null, null, null, null)
         var despesa: Despesa? = null
@@ -106,7 +106,7 @@ class DespesaDAO : SQLiteOpenHelper {
             despesa = Despesa()
             despesa.id = cursor.getInt(0)
             despesa.descricao = cursor.getString(1)
-            despesa.categoria = cursor.getInt(2)
+            despesa.categoria = cursor.getString(2)
             despesa.valor = cursor.getFloat(3)
             return despesa
         } else {

@@ -25,5 +25,7 @@
     <string name="titulo_toolbar_lista_despesa">Lista de despesas</string>
     <string name="lbl_deletar">Deletar</string>
     <string name="titulo_toolbar_lista_receita">Lista de Receitas</string>
+    <string name="error_connection">Voce nao esta conectado, Verifique a conexao!</string>
+    <string name="error_request">resposta invalida, verifique o servidor!</string>
 
 </resources>

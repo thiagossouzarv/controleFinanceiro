@@ -21,7 +21,7 @@ class ReceitaDAO : SQLiteOpenHelper {
         val CREATE_USER = "CREATE TABLE `receitas` (" +
                 " `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 " `descricao` varchar(50) NOT NULL, " +
-                " `categoria_id` INTEGER NOT NULL, " +
+                " `categoria` varchar(50) NOT NULL, " +
                 " `valor` FLOAT(13,2) NOT NULL );"
         if (sqLiteDatabase != null) {
             sqLiteDatabase.execSQL(CREATE_USER)
@@ -42,7 +42,7 @@ class ReceitaDAO : SQLiteOpenHelper {
 
         val despesaTab = ContentValues()
         despesaTab.put("descricao", receita.descricao)
-        despesaTab.put("categoria_id", receita.categoria)
+        despesaTab.put("categoria", receita.categoria)
         despesaTab.put("valor", receita.valor)
 
         db.insert(DB_NAME, null, despesaTab)
@@ -54,7 +54,7 @@ class ReceitaDAO : SQLiteOpenHelper {
 
         val despesaTab = ContentValues()
         despesaTab.put("descricao", receita.descricao)
-        despesaTab.put("categoria_id", receita.categoria)
+        despesaTab.put("categoria", receita.categoria)
         despesaTab.put("valor", receita.valor)
 
 
@@ -83,7 +83,7 @@ class ReceitaDAO : SQLiteOpenHelper {
 
                 receita.id = cursor.getInt(0)
                 receita.descricao = cursor.getString(1)
-                receita.categoria = cursor.getInt(2)
+                receita.categoria = cursor.getString(2)
                 receita.valor = cursor.getFloat(3)
 
                 receitaList.add(receita)
@@ -97,7 +97,7 @@ class ReceitaDAO : SQLiteOpenHelper {
 
         val db = this.readableDatabase
 
-        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria_id", "valor"),
+        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria", "valor"),
                 "id = ?",
                 arrayOf(id.toString()), null, null, null, null)
         var receita: Receita? = null
@@ -106,7 +106,7 @@ class ReceitaDAO : SQLiteOpenHelper {
             receita = Receita()
             receita.id = cursor.getInt(0)
             receita.descricao = cursor.getString(1)
-            receita.categoria = cursor.getInt(2)
+            receita.categoria = cursor.getString(2)
             receita.valor = cursor.getFloat(3)
             return receita
         } else {

@@ -31,7 +31,7 @@ class DespesaActivity : AppCompatActivity() {
             var despesa = Despesa()
             despesa.descricao = descricao.text.toString()
             despesa.valor = valor.text.toString().toFloat()
-            despesa.categoria = categoria.text.toString().toInt()
+            despesa.categoria = categoria.text.toString()
 
             var despesasDAO = DespesaDAO(this)
             despesasDAO.create(despesa)

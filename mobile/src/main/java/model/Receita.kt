@@ -4,7 +4,7 @@ class Receita {
 
     var id: Int = 0
     var descricao: String = ""
-    var categoria: Int = 0
+    var categoria: String = ""
     var valor: Float = 0.0f
 
 }

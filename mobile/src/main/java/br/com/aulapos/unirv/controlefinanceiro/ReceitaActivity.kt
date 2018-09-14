@@ -27,7 +27,7 @@ class ReceitaActivity : AppCompatActivity() {
             var receita = Receita()
             receita.descricao = descricaoReceita.text.toString()
             receita.valor = valorReceita.text.toString().toFloat()
-            receita.categoria = categoriaReceita.text.toString().toInt()
+            receita.categoria = categoriaReceita.text.toString()
 
             var receitaDAO = ReceitaDAO(this)
             receitaDAO.create(receita)
