@@ -105,6 +105,11 @@ class DespesaActivity : AppCompatActivity() {
         imagemURL = imagem
     }
 
+    @Subscribe
+    fun OnEvent(despesa: Despesa) {
+        valor.setText(despesa.valor.toString())
+    }
+
 
     @SuppressLint("ResourceAsColor")
     fun setupToolbar() {

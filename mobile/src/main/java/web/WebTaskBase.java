@@ -29,7 +29,7 @@ public abstract class WebTaskBase extends AsyncTask<Void, Void, Void> {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
     private static int TIMEOUT = 15;
-    private static String BASE_URL = "http://private-122ae-login405.apiary-mock.com/";
+    private static String BASE_URL = "http://private-9ef8e-qrcode4.apiary-mock.com/";
     private String serviceURL;
     private Context context;
     private Error error;
