@@ -85,11 +85,10 @@
 
     <ImageView
         android:id="@+id/imagemComprovanteDespesa"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/botao_salvar_despesa"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_add_circle" />
+        android:layout_margin="10dp" />
 
 
 </RelativeLayout>

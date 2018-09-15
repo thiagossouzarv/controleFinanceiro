@@ -3,6 +3,7 @@ package br.com.aulapos.unirv.controlefinanceiro
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
@@ -16,33 +17,94 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_despesa.*
 import model.Despesa
 import model.DespesaDAO
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.io.File
 
 
 class DespesaActivity : AppCompatActivity() {
-
+    var imagem: Bitmap? = null
+    var imagemURL: String? = null
+    var id: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_despesa)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
 
-        botao_salvar_despesa.setOnClickListener(View.OnClickListener {
-            var despesa = Despesa()
-            despesa.descricao = descricao.text.toString()
-            despesa.valor = valor.text.toString().toFloat()
-            despesa.categoria = categoria.text.toString()
+        buscaCampos()
 
-            var despesasDAO = DespesaDAO(this)
-            despesasDAO.create(despesa)
-            Toast.makeText(this, "Despesa Cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
-            finish()
-//            var lista = despesasDAO.getAll()
-//            for (despesas in lista) {
-//                despesas.descricao
-//            }
+        botao_salvar_despesa.setOnClickListener(View.OnClickListener {
+            salvarDespesa()
         })
     }
+
+
+    fun salvarDespesa() {
+        var despesa = Despesa()
+        despesa.descricao = descricao.text.toString()
+        despesa.valor = valor.text.toString().toFloat()
+        despesa.categoria = categoria.text.toString()
+        despesa.imagem = this!!.imagemURL.toString()
+        despesa.id = id
+
+        var despesasDAO = DespesaDAO(this)
+
+        if (id == 0) {
+            despesasDAO.create(despesa)
+        } else {
+            despesasDAO.update(despesa)
+        }
+        Toast.makeText(this, "Despesa Cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+        finish()
+
+    }
+
+    fun buscaCampos() {
+        val intent = getIntent()
+        id = intent?.getIntExtra("id", 0)!!
+        if (id != 0) {
+            var despesasDAO = DespesaDAO(this)
+            var despesa: Despesa? = despesasDAO.getDespesaById(id!!)
+
+            if (despesa != null) {
+                descricao.setText(despesa.descricao)
+                valor.setText(despesa.valor.toString())
+                categoria.setText(despesa.categoria)
+                imagemURL = despesa.imagem
+                imagem = BitmapFactory.decodeFile(imagemURL)
+                var imagemTela: ImageView = findViewById(R.id.imagemComprovanteDespesa);
+                imagemTela.setImageBitmap(imagem)
+            }
+        }
+
+
+    }
+
+    override fun onStart() {
+        EventBus.getDefault().unregister(this)
+        var imagemTela: ImageView = findViewById(R.id.imagemComprovanteDespesa);
+        imagemTela.setImageBitmap(imagem)
+        super.onStart()
+    }
+
+
+    override fun onStop() {
+        EventBus.getDefault().register(this)
+        super.onStop()
+    }
+
+
+    @Subscribe
+    fun OnEvent(bitmap: Bitmap) {
+        imagem = bitmap
+    }
+
+    @Subscribe
+    fun OnEvent(imagem: String) {
+        imagemURL = imagem
+    }
+
 
     @SuppressLint("ResourceAsColor")
     fun setupToolbar() {
@@ -97,3 +159,4 @@ class DespesaActivity : AppCompatActivity() {
 
 
 }
+

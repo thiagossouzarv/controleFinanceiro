@@ -80,5 +80,12 @@
         android:hint="Salvar"
         android:textColorHint="@color/write" />
 
+    <ImageView
+        android:id="@+id/imagemComprovanteReceita"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/botao_salvar_receita"
+        android:layout_margin="10dp" />
+
 
 </RelativeLayout>

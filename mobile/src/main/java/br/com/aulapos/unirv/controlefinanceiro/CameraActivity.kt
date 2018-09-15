@@ -15,12 +15,12 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.wonderkiln.camerakit.CameraKitEventCallback
 import com.wonderkiln.camerakit.CameraKitImage
 import com.wonderkiln.camerakit.CameraView
 import kotlinx.android.synthetic.main.activity_camera.*
+import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -69,6 +69,7 @@ class CameraActivity : AppCompatActivity() {
         btn_take_pic.setOnClickListener(View.OnClickListener {
             camera.captureImage(CameraKitEventCallback { cameraKitImage ->
                 saveImage(cameraKitImage)
+                //camera.stop()
                 finish()
             })
         })
@@ -116,9 +117,8 @@ class CameraActivity : AppCompatActivity() {
         }
         if (file != null) {
             val myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
-
-            var imagem: ImageView = findViewById(R.id.imagemComprovanteDespesa)
-            imagem.setImageBitmap(myBitmap)
+            EventBus.getDefault().post(myBitmap)
+            EventBus.getDefault().post(file.absolutePath.toString())
         }
         return file!!.absolutePath
     }

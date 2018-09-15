@@ -22,7 +22,8 @@ class ReceitaDAO : SQLiteOpenHelper {
                 " `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 " `descricao` varchar(50) NOT NULL, " +
                 " `categoria` varchar(50) NOT NULL, " +
-                " `valor` FLOAT(13,2) NOT NULL );"
+                " `valor` FLOAT(13,2) NOT NULL," +
+                " `imagem` varchar(255) NULL );"
         if (sqLiteDatabase != null) {
             sqLiteDatabase.execSQL(CREATE_USER)
         }
@@ -44,6 +45,7 @@ class ReceitaDAO : SQLiteOpenHelper {
         despesaTab.put("descricao", receita.descricao)
         despesaTab.put("categoria", receita.categoria)
         despesaTab.put("valor", receita.valor)
+        despesaTab.put("imagem", receita.imagem)
 
         db.insert(DB_NAME, null, despesaTab)
         db.close()
@@ -56,6 +58,7 @@ class ReceitaDAO : SQLiteOpenHelper {
         despesaTab.put("descricao", receita.descricao)
         despesaTab.put("categoria", receita.categoria)
         despesaTab.put("valor", receita.valor)
+        despesaTab.put("imagem", receita.imagem)
 
 
         db.update(DB_NAME, despesaTab, "id=?", arrayOf(receita.id.toString()))
@@ -85,6 +88,7 @@ class ReceitaDAO : SQLiteOpenHelper {
                 receita.descricao = cursor.getString(1)
                 receita.categoria = cursor.getString(2)
                 receita.valor = cursor.getFloat(3)
+                receita.imagem = cursor.getString(4)
 
                 receitaList.add(receita)
             } while (cursor.moveToNext())
@@ -97,7 +101,7 @@ class ReceitaDAO : SQLiteOpenHelper {
 
         val db = this.readableDatabase
 
-        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria", "valor"),
+        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria", "valor", "imagem"),
                 "id = ?",
                 arrayOf(id.toString()), null, null, null, null)
         var receita: Receita? = null
@@ -108,6 +112,7 @@ class ReceitaDAO : SQLiteOpenHelper {
             receita.descricao = cursor.getString(1)
             receita.categoria = cursor.getString(2)
             receita.valor = cursor.getFloat(3)
+            receita.imagem = cursor.getString(4)
             return receita
         } else {
             throw RuntimeException("despesa nao existe!")

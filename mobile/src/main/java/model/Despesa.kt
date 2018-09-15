@@ -6,5 +6,6 @@ class Despesa {
     var descricao: String = ""
     var categoria: String = ""
     var valor: Float = 0.0f
+    var imagem: String = ""
 
 }

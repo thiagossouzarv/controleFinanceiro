@@ -3,6 +3,8 @@ package br.com.aulapos.unirv.controlefinanceiro
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,12 +12,18 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_receita.*
 import model.Receita
 import model.ReceitaDAO
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class ReceitaActivity : AppCompatActivity() {
+    var imagem: Bitmap? = null
+    var imagemURL: String? = null
+    var id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,22 +31,54 @@ class ReceitaActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupToolbar()
 
-        botao_salvar_receita.setOnClickListener(View.OnClickListener {
-            var receita = Receita()
-            receita.descricao = descricaoReceita.text.toString()
-            receita.valor = valorReceita.text.toString().toFloat()
-            receita.categoria = categoriaReceita.text.toString()
+        buscaCampos()
 
-            var receitaDAO = ReceitaDAO(this)
-            receitaDAO.create(receita)
-            Toast.makeText(this, "Receita Cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
-            finish()
-//            var lista = despesasDAO.getAll()
-//            for (despesas in lista) {
-//                despesas.descricao
-//            }
+        botao_salvar_receita.setOnClickListener(View.OnClickListener {
+            salvarReceita()
         })
     }
+
+    fun salvarReceita() {
+        var receita = Receita()
+        receita.descricao = descricaoReceita.text.toString()
+        receita.valor = valorReceita.text.toString().toFloat()
+        receita.categoria = categoriaReceita.text.toString()
+        receita.imagem = this!!.imagemURL.toString()
+        receita.id = id
+
+        var receitaDAO = ReceitaDAO(this)
+
+        if (id == 0) {
+            receitaDAO.create(receita)
+        } else {
+            receitaDAO.update(receita)
+        }
+        Toast.makeText(this, "Receita Cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+        finish()
+
+    }
+
+    fun buscaCampos() {
+        val intent = getIntent()
+        id = intent?.getIntExtra("id", 0)!!
+        if (id != 0) {
+            var receitaDAO = ReceitaDAO(this)
+            var receita: Receita? = receitaDAO.getDespesaById(id!!)
+
+            if (receita != null) {
+                descricaoReceita.setText(receita.descricao)
+                valorReceita.setText(receita.valor.toString())
+                categoriaReceita.setText(receita.categoria)
+                imagemURL = receita.imagem
+                imagem = BitmapFactory.decodeFile(imagemURL)
+                var imagemTela: ImageView = findViewById(R.id.imagemComprovanteReceita);
+                imagemTela.setImageBitmap(imagem)
+            }
+        }
+
+
+    }
+
 
     @SuppressLint("ResourceAsColor")
     fun setupToolbar() {
@@ -56,6 +96,32 @@ class ReceitaActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onStart() {
+        EventBus.getDefault().unregister(this)
+        var imagemTela: ImageView = findViewById(R.id.imagemComprovanteReceita);
+        imagemTela.setImageBitmap(imagem)
+        super.onStart()
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().register(this)
+        super.onStop()
+    }
+
+
+    @Subscribe
+    fun OnEvent(bitmap: Bitmap) {
+        imagem = bitmap
+    }
+
+
+    @Subscribe
+    fun OnEvent(imagem: String) {
+        imagemURL = imagem
+    }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_receita, menu)

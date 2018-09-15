@@ -22,7 +22,8 @@ class DespesaDAO : SQLiteOpenHelper {
                 " `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 " `descricao` varchar(50) NOT NULL, " +
                 " `categoria` varchar(50) NOT NULL, " +
-                " `valor` FLOAT(13,2) NOT NULL );"
+                " `valor` FLOAT(13,2) NOT NULL , " +
+                " `imagem` varchar(255) NULL );"
         if (sqLiteDatabase != null) {
             sqLiteDatabase.execSQL(CREATE_USER)
         }
@@ -44,6 +45,7 @@ class DespesaDAO : SQLiteOpenHelper {
         despesaTab.put("descricao", despesa.descricao)
         despesaTab.put("categoria", despesa.categoria)
         despesaTab.put("valor", despesa.valor)
+        despesaTab.put("imagem", despesa.imagem)
 
         db.insert(DB_NAME, null, despesaTab)
         db.close()
@@ -56,6 +58,7 @@ class DespesaDAO : SQLiteOpenHelper {
         despesaTab.put("descricao", despesa.descricao)
         despesaTab.put("categoria", despesa.categoria)
         despesaTab.put("valor", despesa.valor)
+        despesaTab.put("imagem", despesa.imagem)
 
 
         db.update(DB_NAME, despesaTab, "id=?", arrayOf(despesa.id.toString()))
@@ -85,6 +88,7 @@ class DespesaDAO : SQLiteOpenHelper {
                 despesas.descricao = cursor.getString(1)
                 despesas.categoria = cursor.getString(2)
                 despesas.valor = cursor.getFloat(3)
+                despesas.imagem = cursor.getString(4)
 
                 despesasList.add(despesas)
             } while (cursor.moveToNext())
@@ -97,7 +101,7 @@ class DespesaDAO : SQLiteOpenHelper {
 
         val db = this.readableDatabase
 
-        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria", "valor"),
+        val cursor = db.query(TABLE_TASKS, arrayOf("id", "descricao", "categoria", "valor", "imagem"),
                 "id = ?",
                 arrayOf(id.toString()), null, null, null, null)
         var despesa: Despesa? = null
@@ -108,6 +112,7 @@ class DespesaDAO : SQLiteOpenHelper {
             despesa.descricao = cursor.getString(1)
             despesa.categoria = cursor.getString(2)
             despesa.valor = cursor.getFloat(3)
+            despesa.imagem = cursor.getString(4)
             return despesa
         } else {
             throw RuntimeException("despesa nao existe!")

@@ -1,13 +1,16 @@
 package adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import br.com.aulapos.unirv.controlefinanceiro.DespesaActivity
 import br.com.aulapos.unirv.controlefinanceiro.R
 import model.Despesa
 import model.DespesaDAO
@@ -57,7 +60,19 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
 
         })
 
+        val item: LinearLayout? = viewHolder.item
 
+        item?.setOnClickListener(View.OnClickListener {
+            abreTelaDespesa(despesa?.id!!)
+        })
+
+
+    }
+
+    fun abreTelaDespesa(id: Int) {
+        var intent = Intent(contexto, DespesaActivity::class.java)
+        intent.putExtra("id", id)
+        contexto?.startActivity(intent)
     }
 
     fun deletaDespesa(id: Int, context: Context) {
@@ -78,12 +93,14 @@ class DespesasAdapter : RecyclerView.Adapter<DespesasAdapter.ViewHolder> {
         var valor: TextView? = null
         var categoria: TextView? = null
         var button: Button? = null
+        var item: LinearLayout? = null
 
         constructor(itemView: View) : super(itemView) {
             nameTextView = itemView.findViewById(R.id.rvDescricao) as TextView
             valor = itemView.findViewById(R.id.rvValor) as TextView
-            categoria = itemView.findViewById(R.id.rvCategoria)
+            categoria = itemView.findViewById(R.id.rvCategoria) as TextView
             button = itemView.findViewById(R.id.rvDelete_button) as Button
+            item = itemView.findViewById(R.id.rvItemDespesa) as LinearLayout
 
         }
     }

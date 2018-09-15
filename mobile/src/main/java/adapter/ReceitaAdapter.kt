@@ -1,14 +1,17 @@
 package adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import br.com.aulapos.unirv.controlefinanceiro.R
+import br.com.aulapos.unirv.controlefinanceiro.ReceitaActivity
 import model.Receita
 import model.ReceitaDAO
 
@@ -56,9 +59,20 @@ class ReceitaAdapter : RecyclerView.Adapter<ReceitaAdapter.ViewHolder> {
             deletaReceita(receita?.id!!, this.contexto!!)
 
         })
+        val item: LinearLayout? = viewHolder.item
 
+        item?.setOnClickListener(View.OnClickListener {
+            abreTelaReceita(receita?.id!!)
+        })
 
     }
+
+    fun abreTelaReceita(id: Int) {
+        var intent = Intent(contexto, ReceitaActivity::class.java)
+        intent.putExtra("id", id)
+        contexto?.startActivity(intent)
+    }
+
 
     fun deletaReceita(id: Int, context: Context) {
         var receitaDAO = ReceitaDAO(context)
@@ -78,12 +92,14 @@ class ReceitaAdapter : RecyclerView.Adapter<ReceitaAdapter.ViewHolder> {
         var valor: TextView? = null
         var button: Button? = null
         var categoria: TextView? = null
+        var item: LinearLayout? = null
 
         constructor(itemView: View) : super(itemView) {
             nameTextView = itemView.findViewById(R.id.rvDescricaoReceita) as TextView
             valor = itemView.findViewById(R.id.rvValorReceita) as TextView
             categoria = itemView.findViewById(R.id.rvCategoriaReceita)
             button = itemView.findViewById(R.id.rvDelete_button_receita) as Button
+            item = itemView.findViewById(R.id.rvItemReceita) as LinearLayout
 
         }
     }
